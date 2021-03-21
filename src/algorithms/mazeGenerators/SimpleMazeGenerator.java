@@ -13,7 +13,7 @@ public class SimpleMazeGenerator extends AMazeGenerator{
         int[][] randonMaze = new int[row][col];
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                randonMaze[i][j] = r.nextInt(1);
+                randonMaze[i][j] = r.nextInt(2);
             }
         }
         int x=4;
