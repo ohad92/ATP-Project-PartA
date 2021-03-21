@@ -17,16 +17,16 @@ public class SimpleMazeGenerator extends AMazeGenerator{
             }
         }
         for (int i = 0; i < col; i++) {
-            randonMaze[0][i] = 1;
+            randonMaze[0][i] = 0;
         }
-        for (int i = row; i < col; i++) {
-            randonMaze[row][i] = 1;
+        for (int i = 0; i < col; i++) {
+            randonMaze[row-1][i] = 0;
         }
         for (int i = 0; i < row; i++) {
-            randonMaze[0][i] = 1;
+            randonMaze[i][0] = 0;
         }
-        for (int i = col; i < row; i++) {
-            randonMaze[col][i] = 1;
+        for (int i = 0; i < row; i++) {
+            randonMaze[i][col-1] = 0;
         }
         Maze maze = new Maze(row,col,randonMaze);
         return maze;
