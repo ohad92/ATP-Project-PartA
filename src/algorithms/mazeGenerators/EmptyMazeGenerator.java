@@ -1,4 +1,4 @@
-package algorithems.mazeGenerators;
+package algorithms.mazeGenerators;
 
 public class EmptyMazeGenerator {
 }
