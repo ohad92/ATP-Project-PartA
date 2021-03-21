@@ -1,15 +1,13 @@
 /**
  * Created by Aviad on 5/10/2017.
  */
-/*
 import algorithms.mazeGenerators.*;
 import algorithms.search.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Main {
-
+/*
     public static String m_resultsFileName = "results.txt";
 
     public static enum TestStatus {

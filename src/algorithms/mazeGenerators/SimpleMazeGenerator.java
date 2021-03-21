@@ -16,11 +16,19 @@ public class SimpleMazeGenerator extends AMazeGenerator{
                 randonMaze[i][j] = r.nextInt(1);
             }
         }
-        int x=4;
+        for (int i = 0; i < col; i++) {
+            randonMaze[0][i] = 1;
+        }
+        for (int i = row; i < col; i++) {
+            randonMaze[row][i] = 1;
+        }
+        for (int i = 0; i < row; i++) {
+            randonMaze[0][i] = 1;
+        }
+        for (int i = col; i < row; i++) {
+            randonMaze[col][i] = 1;
+        }
         Maze maze = new Maze(row,col,randonMaze);
-
-
-
         return maze;
     }
 }
