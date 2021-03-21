@@ -1,15 +1,44 @@
 /**
  * Created by Aviad on 5/10/2017.
  */
+
 import algorithms.mazeGenerators.*;
 import algorithms.search.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-/*
-    public static String m_resultsFileName = "results.txt";
+public class Main {
+    public static void main(String[] args) {
+        AMazeGenerator a = new SimpleMazeGenerator(30,30);
 
+        Maze maze = a.generatore(30,30);
+
+
+            for(int i = 0; i < maze.getMaze().length; ++i) {
+                for(int j = 0; j < maze.getMaze()[i].length; ++j) {
+
+                     if (maze.getMaze()[i][j] == 1) {
+                        System.out.print(" \u001b[45m ");
+                    } else if (maze.getMaze()[i][j] == 0) {
+                        System.out.print(" \u001b[107m ");
+                    }
+                    else{
+                        System.out.print(" \u001b[42m ");
+                    }
+                }
+
+                System.out.println(" \u001b[107m");
+            }
+        }
+
+
+    }
+
+/*
+public class Main {
+
+    public static String m_resultsFileName = "results.txt";
     public static enum TestStatus {
         Passed, Failed
     }
