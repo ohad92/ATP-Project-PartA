@@ -16,6 +16,7 @@ public class SimpleMazeGenerator extends AMazeGenerator{
                 randonMaze[i][j] = r.nextInt(1);
             }
         }
+        int x=4;
         Maze maze = new Maze(row,col,randonMaze);
 
 
