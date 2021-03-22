@@ -10,10 +10,10 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        AMazeGenerator a = new SimpleMazeGenerator(30,30);
+        AMazeGenerator a = new EmptyMazeGenerator();
 
-        Maze maze = a.generatore(30,30);
-
+        Maze maze = a.generate(15,15);
+        long c = a.measureAlgorithmTimeMillis(600,600);
 
             for(int i = 0; i < maze.getMaze().length; ++i) {
                 for(int j = 0; j < maze.getMaze()[i].length; ++j) {

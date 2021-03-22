@@ -3,12 +3,12 @@ import java.util.Random;
 
 public class SimpleMazeGenerator extends AMazeGenerator{
 
-    public SimpleMazeGenerator(int rows, int cols) {
-        super(rows, cols);
+    public SimpleMazeGenerator() {
+        super();
     }
 
     @Override
-    public Maze generatore(int row, int col) {
+    public Maze generate(int row, int col) {
         Random r = new Random();
         int[][] randonMaze = new int[row][col];
         for (int i = 0; i < row; i++) {
