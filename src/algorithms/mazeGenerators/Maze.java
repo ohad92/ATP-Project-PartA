@@ -90,6 +90,20 @@ public class Maze {
         return Pfrontiers;
     }
 
+    public void print(){
+        for (int i=0; i<rows; i++){
+            for (int j=0; j<cols; j++){
+                if ((i==this.start.getRowIndex()) && (j==this.start.getColumnIndex()))
+                    System.out.print("S");
 
+                else if ((i==this.goal.getRowIndex()) && (j==this.goal.getColumnIndex()))
+                    System.out.print("E");
+
+                else
+                    System.out.print(maze[i][j]);
+            }
+            System.out.println();
+        }
+    }
 }
 

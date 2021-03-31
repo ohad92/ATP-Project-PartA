@@ -26,6 +26,9 @@ public class Position {
         this.colindex = colindex;
     }
 
-
+    @Override
+    public String toString() {
+        return "{" + rowindex + "," + colindex + '}';
+    }
 }
 
