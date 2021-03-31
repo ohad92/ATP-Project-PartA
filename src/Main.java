@@ -1,7 +1,3 @@
-/**
- * Created by Aviad on 5/10/2017.
- */
-
 import algorithms.mazeGenerators.*;
 import algorithms.search.*;
 
@@ -10,10 +6,12 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        AMazeGenerator a = new EmptyMazeGenerator();
+        AMazeGenerator a = new MyMazeGenerator();
+        //AMazeGenerator b = new SimpleMazeGenerator();
 
-        Maze maze = a.generate(15,15);
-        long c = a.measureAlgorithmTimeMillis(600,600);
+        Maze maze = a.generate(30,30);
+        //long c = a.measureAlgorithmTimeMillis(200,200);
+
 
             for(int i = 0; i < maze.getMaze().length; ++i) {
                 for(int j = 0; j < maze.getMaze()[i].length; ++j) {
@@ -46,7 +44,7 @@ public class Main {
     public static void main(String[] args) {
         appendToResultsFile("Test started!");
         Tests_GenerateMaze();
-        Tests_SearchOnMaze();
+        //Tests_SearchOnMaze();
         appendToResultsFile("Test finished!");
     }
 
@@ -82,7 +80,7 @@ public class Main {
             // generate another maze
             Maze maze = mazeGenerator.generate(rows, columns);
             // prints the maze
-            maze.print();
+            //maze.print();
 
             // get the maze entrance
             Position startPosition = maze.getStartPosition();
@@ -100,7 +98,7 @@ public class Main {
         }
     }
     //</editor-fold>
-
+/*
     //<editor-fold desc="Tests_SearchOnMaze">
     private static void Tests_SearchOnMaze() {
         boolean testPassed;

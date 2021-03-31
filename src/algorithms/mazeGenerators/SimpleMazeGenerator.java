@@ -28,7 +28,8 @@ public class SimpleMazeGenerator extends AMazeGenerator{
         for (int i = 0; i < row; i++) {
             randonMaze[i][col-1] = 0;
         }
-        Maze maze = new Maze(row,col,randonMaze);
+        Maze maze = new Maze(row,col);
+        maze.setMaze(randonMaze);
         return maze;
     }
 }
