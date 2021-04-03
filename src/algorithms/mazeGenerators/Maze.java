@@ -34,7 +34,15 @@ public class Maze {
         return goal;
     }
 
-    public void setcell(Position p,int wallORpass){
+    public int getRows() {
+        return rows;
+    }
+
+    public int getCols() {
+        return cols;
+    }
+
+    public void setcell(Position p, int wallORpass){
        this.maze[p.getRowIndex()][p.getColumnIndex()] =  wallORpass;
     }
 
@@ -92,7 +100,9 @@ public class Maze {
 
     public void print(){
         for (int i=0; i<rows; i++){
+            System.out.print("{");
             for (int j=0; j<cols; j++){
+                System.out.print(" ");
                 if ((i==this.start.getRowIndex()) && (j==this.start.getColumnIndex()))
                     System.out.print("S");
 
@@ -101,9 +111,37 @@ public class Maze {
 
                 else
                     System.out.print(maze[i][j]);
+                System.out.print(" ");
             }
+            System.out.print("}");
             System.out.println();
         }
+    }
+
+
+    // printing real maze to the screen
+    public void printRealMaze(){
+        for(int i = 0; i < maze.length; ++i) {
+                for(int j = 0; j < maze[i].length; ++j) {
+
+                    if ((i==start.getRowIndex()) && (j==goal.getColumnIndex()))
+                        System.out.print(" \u001b[42m ");
+
+                    else if ((i==goal.getRowIndex()) && (j==goal.getColumnIndex()))
+                        System.out.print(" \u001b[42m ");
+
+                    else if (maze[i][j] == 1) {
+                        System.out.print(" \u001b[45m ");
+                    } else if (maze[i][j] == 0) {
+                        System.out.print(" \u001b[107m ");
+                    }
+                    else{
+                        System.out.print(" \u001b[42m ");
+                    }
+                }
+
+                System.out.println(" \u001b[107m");
+            }
     }
 }
 

@@ -3,42 +3,23 @@ import algorithms.search.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+/*
 public class Main {
     public static void main(String[] args) {
         AMazeGenerator a = new MyMazeGenerator();
         //AMazeGenerator b = new SimpleMazeGenerator();
 
-        Maze maze = a.generate(30,30);
-        //long c = a.measureAlgorithmTimeMillis(200,200);
-        //maze.print();
+        Maze maze = a.generate(20,20);
+        //long c = a.measureAlgorithmTimeMillis(10,10);
+        maze.print();
+        maze.printRealMaze();
 
-            for(int i = 0; i < maze.getMaze().length; ++i) {
-                for(int j = 0; j < maze.getMaze()[i].length; ++j) {
-
-                    if ((i==maze.getStartPosition().getRowIndex()) && (j==maze.getStartPosition().getColumnIndex()))
-                        System.out.print("S");
-
-                    else if ((i==maze.getGoalPosition().getRowIndex()) && (j==maze.getGoalPosition().getColumnIndex()))
-                        System.out.print("E");
-
-                    else if (maze.getMaze()[i][j] == 1) {
-                        System.out.print(" \u001b[45m ");
-                    } else if (maze.getMaze()[i][j] == 0) {
-                        System.out.print(" \u001b[107m ");
-                    }
-                    else{
-                        System.out.print(" \u001b[42m ");
-                    }
-                }
-
-                System.out.println(" \u001b[107m");
-            }
         }
 
 
     }
+*/
 
-/*
 public class Main {
 
     public static String m_resultsFileName = "results.txt";
@@ -105,44 +86,44 @@ public class Main {
     //</editor-fold>
 
     //<editor-fold desc="Tests_SearchOnMaze">
-//    private static void Tests_SearchOnMaze() {
-//        boolean testPassed;
-//        IMazeGenerator mg = new MyMazeGenerator();
-//
-//        int[][] rowsColumnsCombinations = getRowsColumnsCombinations();
-//
-//        int rows = 0;
-//        int columns = 0;
-//        for (int i = 0; i < rowsColumnsCombinations.length; i++) {
-//            try {
-//                rows = rowsColumnsCombinations[i][0];
-//                columns = rowsColumnsCombinations[i][1];
-//
-//                Maze maze = mg.generate(rows, columns);
-//                SearchableMaze searchableMaze = new SearchableMaze(maze);
-//
-//                testPassed = solveProblem(searchableMaze, new BreadthFirstSearch(), rows, columns);
-//
-//            } catch (Exception e) {
-//                appendToResultsFile(String.format("Fatal Error when converting Maze to SearchableMaze (%s,%s): %s", rows, columns, e.getMessage()));
-//            }
-//        }
-//    }
+    private static void Tests_SearchOnMaze() {
+        boolean testPassed;
+        IMazeGenerator mg = new MyMazeGenerator();
 
-//    private static boolean solveProblem(ISearchable domain, ISearchingAlgorithm searcher, int rows, int columns) {
-//        boolean testStatus = false;
-//        try {
-//            //Solve a searching problem with a searcher
-//            Solution solution = searcher.solve(domain);
-//            ArrayList<AState> solutionPath = solution.getSolutionPath();
-//            testStatus = solutionPath.isEmpty() ? false : true;
-//        } catch (Exception e) {
-//            testStatus = false;
-//        } finally {
-//            appendToResultsFile(String.format("TEST %s: Applying %s on maze (%s,%s)", getTestStatusString(testStatus), searcher.getClass().getSimpleName(), rows, columns));
-//        }
-//        return testStatus;
-//    }
+        int[][] rowsColumnsCombinations = getRowsColumnsCombinations();
+
+        int rows = 0;
+        int columns = 0;
+        for (int i = 0; i < rowsColumnsCombinations.length; i++) {
+            try {
+                rows = rowsColumnsCombinations[i][0];
+                columns = rowsColumnsCombinations[i][1];
+
+                Maze maze = mg.generate(rows, columns);
+                SearchableMaze searchableMaze = new SearchableMaze(maze);
+
+                testPassed = solveProblem(searchableMaze, new BreadthFirstSearch(), rows, columns);
+
+            } catch (Exception e) {
+                appendToResultsFile(String.format("Fatal Error when converting Maze to SearchableMaze (%s,%s): %s", rows, columns, e.getMessage()));
+            }
+        }
+    }
+
+    private static boolean solveProblem(ISearchable domain, ISearchingAlgorithm searcher, int rows, int columns) {
+        boolean testStatus = false;
+        try {
+            //Solve a searching problem with a searcher
+            Solution solution = searcher.solve(domain);
+            ArrayList<AState> solutionPath = solution.getSolutionPath();
+            testStatus = solutionPath.isEmpty() ? false : true;
+        } catch (Exception e) {
+            testStatus = false;
+        } finally {
+            appendToResultsFile(String.format("TEST %s: Applying %s on maze (%s,%s)", getTestStatusString(testStatus), searcher.getClass().getSimpleName(), rows, columns));
+        }
+        return testStatus;
+    }
     //</editor-fold>
 
     public static void appendToResultsFile(String text) {
@@ -153,4 +134,4 @@ public class Main {
         }
     }
 }
-*/
+

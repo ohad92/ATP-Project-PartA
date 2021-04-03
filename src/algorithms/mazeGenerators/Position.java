@@ -30,5 +30,13 @@ public class Position {
     public String toString() {
         return "{" + rowindex + "," + colindex + '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Position p = (Position)obj;
+        if (this.getRowIndex() == p.getRowIndex() && this.getColumnIndex() == p.getColumnIndex())
+            return true;
+        return false;
+    }
 }
 
