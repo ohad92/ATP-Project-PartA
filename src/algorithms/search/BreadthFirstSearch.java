@@ -1,10 +1,9 @@
 package algorithms.search;
-import algorithms.mazeGenerators.Position;
 
 import java.util.*;
 
 public class BreadthFirstSearch extends ASearchingAlgorithm {
-    private Queue<AState> queue;
+    protected Queue<AState> queue;
     private ArrayList<AState> visited;
     private ArrayList<AState> successors;
 
@@ -71,8 +70,5 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         return "BreadthFirstSearch";
     }
 
-    public Solution solve2(ISearchable domain) {
-        return null;
-    }
 }
 

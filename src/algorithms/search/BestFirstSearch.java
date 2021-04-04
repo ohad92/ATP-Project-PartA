@@ -1,4 +1,10 @@
 package algorithms.search;
 
-public class BestFirstSearch {
+import java.util.*;
+
+
+public class BestFirstSearch extends BreadthFirstSearch {
+
+
 }
+

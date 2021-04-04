@@ -1,4 +1,7 @@
 package algorithms.mazeGenerators;
+import algorithms.search.AState;
+import algorithms.search.MazeState;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -59,7 +62,7 @@ public class Maze {
     public void setMisgeretpathes(int type) {
         for (int i = 0; i < this.rows; i++) {
             this.maze[i][0] = type;
-            this.maze[cols-1][i] = type;
+            this.maze[i][cols-1] = type;
         }
         for (int i = 0; i < this.cols; i++) {
             this.maze[0][i] = type;
@@ -124,17 +127,22 @@ public class Maze {
         for(int i = 0; i < maze.length; ++i) {
                 for(int j = 0; j < maze[i].length; ++j) {
 
-                    if ((i==start.getRowIndex()) && (j==goal.getColumnIndex()))
-                        System.out.print(" \u001b[42m ");
+                    if ((i==start.getRowIndex()) && (j==start.getColumnIndex()))
+                        System.out.print(" \u001b[41m ");
 
                     else if ((i==goal.getRowIndex()) && (j==goal.getColumnIndex()))
-                        System.out.print(" \u001b[42m ");
+                        System.out.print(" \u001b[41m ");
 
                     else if (maze[i][j] == 1) {
                         System.out.print(" \u001b[45m ");
-                    } else if (maze[i][j] == 0) {
+                    }
+                    else if (maze[i][j] == 0) {
                         System.out.print(" \u001b[107m ");
                     }
+                    else if (maze[i][j] == 2) {
+                         System.out.print(" \u001b[42m ");
+                    }
+
                     else{
                         System.out.print(" \u001b[42m ");
                     }
@@ -142,6 +150,25 @@ public class Maze {
 
                 System.out.println(" \u001b[107m");
             }
+
+
+
     }
+    public void printRealMazeWithSolution(ArrayList<AState> sol){
+        for(int i = 0; i < sol.size(); ++i) {
+                MazeState m = (MazeState)sol.get(i);
+                int a = m.getCurrent().getRowIndex();
+                int b = m.getCurrent().getColumnIndex();
+                Position p = new Position(a,b);
+                setcell(p,2);
+
+
+            }
+        printRealMaze();
+        }
+
+
+
+
 }
 
