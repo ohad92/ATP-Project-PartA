@@ -31,5 +31,6 @@ public class SimpleMazeGenerator extends AMazeGenerator{
         Maze maze = new Maze(row,col);
         maze.setMaze(randonMaze);
         return maze;
+
     }
 }

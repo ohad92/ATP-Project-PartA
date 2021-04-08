@@ -21,48 +21,29 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         int cost;
         AState start = domain.getStartState();
         if (start == null)
-            return solutionPath(start);
+            return new Solution(start);
         AState c; // like shown in the class
         queue.add(start);
 
         while (queue.size()>0){
             c = queue.poll();
-            if (!visited.contains(c)) {
-                NumberOfNodesEvaluated++;
-                visited.add(c);
-                if (c.equals(domain.getGoalState()))
-                    return solutionPath(c);
+            if (c.equals(domain.getGoalState()))
+                return new Solution(c);
 
-
-                successors = domain.getAllSuccessors(c);
-                for (int i=0; i<successors.size();i++){
-                    if (!visited.contains(successors.get(i))){
-                        queue.add(successors.get(i));
-                        successors.get(i).setCameFrom(c);
-                        cost = c.getCost() + successors.get(i).getCost();
-                        successors.get(i).setCost(cost);
-                    }
-
+            successors = domain.getAllSuccessors(c);
+            NumberOfNodesEvaluated++;
+            for (int i=0; i<successors.size();i++){
+                cost = c.getCost() + successors.get(i).getCost();
+                successors.get(i).setCost(cost);
+                if (!visited.contains(successors.get(i))){
+                    successors.get(i).setCameFrom(c);
+                    visited.add(successors.get(i));
+                    queue.add(successors.get(i));
                 }
-
             }
         }
         return (new Solution(successors));
 
-    }
-
-    public Solution solutionPath(AState position){
-        ArrayList<AState> sol = new ArrayList<>();
-        while (position.getCameFrom() != null){
-            sol.add(position);
-            position = position.getCameFrom();
-        }
-        sol.add(position); // the start position
-        //now the arraylist is from the goal position. reverse it so the start position is at index 0
-        Collections.reverse(sol);
-
-        Solution solution = new Solution(sol);
-        return solution;
     }
 
     @Override
@@ -71,4 +52,3 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
     }
 
 }
-

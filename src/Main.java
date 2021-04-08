@@ -30,7 +30,7 @@ public class Main {
     public static void main(String[] args) {
         appendToResultsFile("Test started!");
         Tests_GenerateMaze();
-        //Tests_SearchOnMaze();
+        Tests_SearchOnMaze();
         appendToResultsFile("Test finished!");
     }
 
@@ -40,7 +40,7 @@ public class Main {
 
     private static int[][] getRowsColumnsCombinations() {
         int[][] rowsColumnsCombinations = {
-                {5, 5}
+                {50, 50}
         };
         return rowsColumnsCombinations;
     }
@@ -54,7 +54,7 @@ public class Main {
         for (int i = 0; i < rowsColumnsCombinations.length; i++) {
             rows = rowsColumnsCombinations[i][0];
             columns = rowsColumnsCombinations[i][1];
-            Test_MazeGenerator(new SimpleMazeGenerator(), rows, columns);
+            Test_MazeGenerator(new MyMazeGenerator(), rows, columns);
         }
     }
 
@@ -102,7 +102,7 @@ public class Main {
                 Maze maze = mg.generate(rows, columns);
                 SearchableMaze searchableMaze = new SearchableMaze(maze);
 
-                testPassed = solveProblem(searchableMaze, new BreadthFirstSearch(), rows, columns);
+                testPassed = solveProblem(searchableMaze, new DepthFirstSearch(), rows, columns);
 
             } catch (Exception e) {
                 appendToResultsFile(String.format("Fatal Error when converting Maze to SearchableMaze (%s,%s): %s", rows, columns, e.getMessage()));

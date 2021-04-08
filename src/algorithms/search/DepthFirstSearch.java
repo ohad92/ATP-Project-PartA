@@ -27,7 +27,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm{
                 NumberOfNodesEvaluated++;
                 visited.add(c);
                 if (c.equals(domain.getGoalState()))
-                    return solutionPath(c);
+                    return new Solution(c);
 
                 successors = domain.getAllSuccessors(c);
                 for (int i = 0; i < successors.size(); i++) {
@@ -41,21 +41,6 @@ public class DepthFirstSearch extends ASearchingAlgorithm{
         }
         return (new Solution(successors));
     }
-
-        public Solution solutionPath(AState position){
-            ArrayList<AState> sol = new ArrayList<>();
-            while (position.getCameFrom() != null){
-                sol.add(position);
-                position = position.getCameFrom();
-            }
-            sol.add(position); // the start position
-            //now the arraylist is from the goal position. reverse it so the start position is at index 0
-            Collections.reverse(sol);
-
-            Solution solution = new Solution(sol);
-            return solution;
-        }
-
 
     @Override
     public String getName() {return "DeapthFirstSearch";  }

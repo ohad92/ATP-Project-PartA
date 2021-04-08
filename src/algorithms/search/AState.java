@@ -35,5 +35,8 @@ public abstract class AState {
         this.cameFrom = cameFrom;
     }
 
-
+// Integer.compare return -1 if A<B, 0 if A==B, 1 if A>B
+    public int CompereTowAstates(AState other) {
+        return Integer.compare(this.cost, other.cost);
+    }
 }

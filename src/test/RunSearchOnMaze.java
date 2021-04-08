@@ -1,7 +1,5 @@
 package test;
-import algorithms.mazeGenerators.IMazeGenerator;
-import algorithms.mazeGenerators.Maze;
-import algorithms.mazeGenerators.MyMazeGenerator;
+import algorithms.mazeGenerators.*;
 import algorithms.search.*;
 import java.util.ArrayList;
 
@@ -10,7 +8,7 @@ import java.util.ArrayList;
 public class RunSearchOnMaze {
     public static void main(String[] args) {
         IMazeGenerator mg = new MyMazeGenerator();
-        Maze maze = mg.generate(20, 50); maze.print();
+        Maze maze = mg.generate(50, 50); maze.print();
         SearchableMaze searchableMaze = new SearchableMaze(maze);
         //solveProblem(searchableMaze, new BreadthFirstSearch());
         //solveProblemWithMaze(searchableMaze, new BreadthFirstSearch(),maze);

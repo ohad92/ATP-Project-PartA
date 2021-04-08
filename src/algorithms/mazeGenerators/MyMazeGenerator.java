@@ -5,7 +5,6 @@ public class MyMazeGenerator extends AMazeGenerator {
 
     @Override
     public Maze generate(int row, int col) {
-
         //Prim maze algorithm implementation
 
         Maze maze = new Maze(row, col);
@@ -17,6 +16,7 @@ public class MyMazeGenerator extends AMazeGenerator {
 
         maze.setcell(maze.getStartPosition(),0);
         maze.setcell(maze.getGoalPosition(),0);
+
         frontiers.addAll(maze.frontiers(maze.getStartPosition(),1));
 
         while (!frontiers.isEmpty()){
@@ -44,13 +44,13 @@ public class MyMazeGenerator extends AMazeGenerator {
                 maze.setcell(toset,0);
             }
             maze.setcell(randomPosition,0);
-            frontiers.addAll(maze.frontiers(randomPosition,1));
             frontiers.remove(randomPosition);
-/*
-            // make sure there is no duplicate positions
-            Set<Position> set = new HashSet<Position>(frontiers);
-            frontiers.clear();
-            frontiers.addAll(set);*/
+            frontiers.addAll(maze.frontiers(randomPosition,1));
+
+            //make sure there is no duplicate positions
+//            Set<Position> set = new HashSet<Position>(frontiers);
+//            frontiers.clear();
+//            frontiers.addAll(set);
         }
         maze.setMisgeretpathes(0);
         return maze;

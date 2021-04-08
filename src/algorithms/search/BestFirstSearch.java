@@ -5,6 +5,10 @@ import java.util.*;
 
 public class BestFirstSearch extends BreadthFirstSearch {
 
+    public BestFirstSearch(){
+        super();
+        this.queue = new PriorityQueue<>(AState::CompereTowAstates);
 
+    }
 }
 

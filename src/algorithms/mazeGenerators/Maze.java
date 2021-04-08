@@ -3,6 +3,7 @@ import algorithms.search.AState;
 import algorithms.search.MazeState;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Maze {
@@ -75,8 +76,9 @@ public class Maze {
 //    set random start + end position
     public void setRandomPositoins(){
         Random rand = new Random();
-        this.start = new Position(0, rand.nextInt(this.cols));
-        this.goal = new Position(rows-1,rand.nextInt(this.cols));
+        this.start = new Position(rand.nextInt(this.rows),0);
+        this.goal = new Position(rand.nextInt(this.rows),this.cols-1);
+
 
     }
 //  compute the neighbors in distance 2 from a position, if it is a wall or path
@@ -166,9 +168,6 @@ public class Maze {
             }
         printRealMaze();
         }
-
-
-
 
 }
 
