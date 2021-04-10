@@ -4,12 +4,12 @@ import java.util.*;
 
 public class BreadthFirstSearch extends ASearchingAlgorithm {
     protected Queue<AState> queue;
-    private ArrayList<AState> visited;
+    private HashSet<String> visited;
     private ArrayList<AState> successors;
 
     public BreadthFirstSearch() {
         this.queue = new LinkedList<>();
-        this.visited = new ArrayList<>();
+        this.visited = new HashSet<>();
         this.successors = new ArrayList<>();
     }
 
@@ -24,7 +24,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
             return new Solution(start);
         AState c; // like shown in the class
         queue.add(start);
-
+        visited.add(start.toString());
         while (queue.size()>0){
             c = queue.poll();
             if (c.equals(domain.getGoalState()))
@@ -35,9 +35,9 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
             for (int i=0; i<successors.size();i++){
                 cost = c.getCost() + successors.get(i).getCost();
                 successors.get(i).setCost(cost);
-                if (!visited.contains(successors.get(i))){
+                if (!visited.contains(successors.get(i).toString())){
                     successors.get(i).setCameFrom(c);
-                    visited.add(successors.get(i));
+                    visited.add(successors.get(i).toString());
                     queue.add(successors.get(i));
                 }
             }

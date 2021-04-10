@@ -1,28 +1,17 @@
+/**
+ * Created by Aviad on 5/10/2017.
+ */
+
 import algorithms.mazeGenerators.*;
 import algorithms.search.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
-/*
-public class Main {
-    public static void main(String[] args) {
-        AMazeGenerator a = new MyMazeGenerator();
-        //AMazeGenerator b = new SimpleMazeGenerator();
-
-        Maze maze = a.generate(20,20);
-        //long c = a.measureAlgorithmTimeMillis(10,10);
-        maze.print();
-        maze.printRealMaze();
-
-        }
-
-
-    }
-*/
 
 public class Main {
 
     public static String m_resultsFileName = "results.txt";
+
     public static enum TestStatus {
         Passed, Failed
     }
@@ -40,7 +29,7 @@ public class Main {
 
     private static int[][] getRowsColumnsCombinations() {
         int[][] rowsColumnsCombinations = {
-                {50, 50}
+                {5, 5}
         };
         return rowsColumnsCombinations;
     }
@@ -54,7 +43,7 @@ public class Main {
         for (int i = 0; i < rowsColumnsCombinations.length; i++) {
             rows = rowsColumnsCombinations[i][0];
             columns = rowsColumnsCombinations[i][1];
-            Test_MazeGenerator(new MyMazeGenerator(), rows, columns);
+            Test_MazeGenerator(new SimpleMazeGenerator(), rows, columns);
         }
     }
 
@@ -102,7 +91,7 @@ public class Main {
                 Maze maze = mg.generate(rows, columns);
                 SearchableMaze searchableMaze = new SearchableMaze(maze);
 
-                testPassed = solveProblem(searchableMaze, new DepthFirstSearch(), rows, columns);
+                testPassed = solveProblem(searchableMaze, new BreadthFirstSearch(), rows, columns);
 
             } catch (Exception e) {
                 appendToResultsFile(String.format("Fatal Error when converting Maze to SearchableMaze (%s,%s): %s", rows, columns, e.getMessage()));
@@ -134,4 +123,3 @@ public class Main {
         }
     }
 }
-

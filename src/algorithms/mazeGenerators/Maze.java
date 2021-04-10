@@ -3,7 +3,6 @@ import algorithms.search.AState;
 import algorithms.search.MazeState;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Maze {
@@ -50,6 +49,7 @@ public class Maze {
        this.maze[p.getRowIndex()][p.getColumnIndex()] =  wallORpass;
     }
 
+
     // set maze only with walls or pathes
     public void setuniformmaze(int type){
         for (int i = 0; i < this.rows; i++) {
@@ -72,7 +72,6 @@ public class Maze {
 
     }
 
-
 //    set random start + end position
     public void setRandomPositoins(){
         Random rand = new Random();
@@ -81,24 +80,24 @@ public class Maze {
 
 
     }
-//  compute the neighbors in distance 2 from a position, if it is a wall or path
+//  compute the opposite neighbors in distance 1 from a position, if it is a wall or path
     public ArrayList<Position> frontiers(Position p,int wallorpassage) {
         ArrayList<Position> Pfrontiers = new ArrayList<>();
         // check if there is neighbor above and it is a wall
-        if (p.getRowIndex() > 1 && this.maze[p.getRowIndex() - 2][p.getColumnIndex()] == wallorpassage)
-            Pfrontiers.add(new Position(p.getRowIndex() - 2, p.getColumnIndex()));
+        if (p.getRowIndex() > 0 && this.maze[p.getRowIndex() - 1][p.getColumnIndex()] == wallorpassage)
+            Pfrontiers.add(new Position(p.getRowIndex() + 1, p.getColumnIndex()));
 
         // check if there is neighbor below and it is a wall
-        if (p.getRowIndex() < this.rows - 2 && this.maze[p.getRowIndex() + 2][p.getColumnIndex()] == wallorpassage)
-            Pfrontiers.add(new Position(p.getRowIndex() + 2, p.getColumnIndex()));
+        if (p.getRowIndex() < this.rows - 1 && this.maze[p.getRowIndex() + 1][p.getColumnIndex()] == wallorpassage)
+            Pfrontiers.add(new Position(p.getRowIndex() - 1, p.getColumnIndex()));
 
         // check if there is neighbor to the right and it is a wall
-        if (p.getColumnIndex() < this.cols - 2 && this.maze[p.getRowIndex()][p.getColumnIndex() + 2] == wallorpassage)
-            Pfrontiers.add(new Position(p.getRowIndex(), p.getColumnIndex() + 2));
+        if (p.getColumnIndex() < this.cols - 1 && this.maze[p.getRowIndex()][p.getColumnIndex() + 1] == wallorpassage)
+            Pfrontiers.add(new Position(p.getRowIndex(), p.getColumnIndex() - 1));
 
         // check if there is neighbor to the left and it is a wall
-        if (p.getColumnIndex() > 1 && this.maze[p.getRowIndex()][p.getColumnIndex() - 2] == wallorpassage)
-            Pfrontiers.add(new Position(p.getRowIndex(), p.getColumnIndex() - 2));
+        if (p.getColumnIndex() > 0 && this.maze[p.getRowIndex()][p.getColumnIndex() - 1] == wallorpassage)
+            Pfrontiers.add(new Position(p.getRowIndex(), p.getColumnIndex() + 1));
 
         return Pfrontiers;
     }

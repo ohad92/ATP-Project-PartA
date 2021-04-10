@@ -10,5 +10,9 @@ public class BestFirstSearch extends BreadthFirstSearch {
         this.queue = new PriorityQueue<>(AState::CompereTowAstates);
 
     }
+    @Override
+    public String getName() {
+        return "BestFirstSearch";
+    }
 }
 

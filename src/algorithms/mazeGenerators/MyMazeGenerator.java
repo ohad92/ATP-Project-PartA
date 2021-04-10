@@ -1,3 +1,5 @@
+
+
 package algorithms.mazeGenerators;
 import java.util.*;
 
@@ -11,71 +13,61 @@ public class MyMazeGenerator extends AMazeGenerator {
         maze.setRandomPositoins();
         maze.setuniformmaze(1);
 
-        ArrayList<Position> frontiers = new ArrayList<>();
-        ArrayList<Position> neighbors = new ArrayList<>();
-
-        maze.setcell(maze.getStartPosition(),0);
+        maze.setcell(maze.getStartPosition(), 0);
         maze.setcell(maze.getGoalPosition(),0);
 
-        frontiers.addAll(maze.frontiers(maze.getStartPosition(),1));
+        ArrayList<Position> frontiers = getNeighbors(maze.getStartPosition(),maze);
+        ArrayList<Position> unVisited = new ArrayList<>();
 
-        while (!frontiers.isEmpty()){
+        while (!frontiers.isEmpty()) {
             Position randomPosition = randomPosition(frontiers);
+            unVisited.clear();
+            unVisited = maze.frontiers(randomPosition,0);
+            Position A,B;
+            if (unVisited.size() == 1) {
+                A = new Position(randomPosition.getRowIndex(), randomPosition.getColumnIndex());
+                maze.setcell(A, 0);
 
-            neighbors.clear();
-            neighbors.addAll(maze.frontiers(randomPosition,0));
-
-            // choose random position from neighbors array
-            Position randomNeighbor = randomPositionNeighbor(neighbors);
-
-            Position toset;
-
-            //randomPosition and randomNeighbor in the same row
-            if (randomPosition.getRowIndex() == randomNeighbor.getRowIndex())
-            {
-                toset = new Position(randomPosition.getRowIndex(),(randomPosition.getColumnIndex()+randomNeighbor.getColumnIndex())/2);
-                maze.setcell(toset,0);
+                A = unVisited.get(0);
+                if ((A.getRowIndex() >= 0) && (A.getRowIndex() < row) && (A.getColumnIndex() >= 0) && (A.getColumnIndex() < col)) {
+                    B = new Position(A.getRowIndex(), A.getColumnIndex());
+                    maze.setcell(B, 0);
+                    frontiers.addAll(getNeighbors(A,maze));
+                }
             }
-
-            //randomPosition and randomNeighbor in the same column
-            else
-            {
-                toset = new Position((randomPosition.getRowIndex()+randomNeighbor.getRowIndex())/2,randomPosition.getColumnIndex());
-                maze.setcell(toset,0);
-            }
-            maze.setcell(randomPosition,0);
             frontiers.remove(randomPosition);
-            frontiers.addAll(maze.frontiers(randomPosition,1));
-
-            //make sure there is no duplicate positions
-//            Set<Position> set = new HashSet<Position>(frontiers);
-//            frontiers.clear();
-//            frontiers.addAll(set);
         }
-        maze.setMisgeretpathes(0);
+
         return maze;
     }
 
-
-    public Position randomPosition(ArrayList<Position> arr)
-    {
+    public Position randomPosition(ArrayList<Position> arr) {
         Random rand = new Random();
         if (arr.size() == 0)
             return null;
         return arr.get(rand.nextInt(arr.size()));
     }
-    public Position randomPositionNeighbor(ArrayList<Position> arr)
-    {
-        if (arr.size() == 0)
-            return null;
-        else if (arr.size() == 1)
-            return arr.get(0);
-        else if (arr.size() % 2 == 0)
-            return arr.get(0);
-        else if (arr.size() % 2 == 1)
-            return arr.get(0);
-        return null;
+
+    //  compute the neighbors of a position
+    public ArrayList<Position> getNeighbors(Position p, Maze maze) {
+        ArrayList<Position> Neighbors = new ArrayList<>();
+
+        // check if there is neighbor above
+        if (p.getRowIndex() > 0)
+            Neighbors.add(new Position(p.getRowIndex() - 1, p.getColumnIndex()));
+
+        // check if there is neighbor below
+        if (p.getRowIndex() < maze.getRows() - 1)
+            Neighbors.add(new Position(p.getRowIndex() + 1, p.getColumnIndex()));
+
+        // check if there is neighbor to the right
+        if (p.getColumnIndex() < maze.getCols() - 1)
+            Neighbors.add(new Position(p.getRowIndex(), p.getColumnIndex() + 1));
+
+        // check if there is neighbor to the left
+        if (p.getColumnIndex() > 0 )
+            Neighbors.add(new Position(p.getRowIndex(), p.getColumnIndex() - 1));
+
+        return Neighbors;
     }
-
-
 }
