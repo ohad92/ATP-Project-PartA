@@ -11,7 +11,11 @@ public class DepthFirstSearch extends ASearchingAlgorithm{
         this.visited = new HashSet<>();
         this.successors = new ArrayList<>();;
     }
-
+    /**
+     * Solves a given domain by DFS algorithm
+     * @param domain - an ISearchable object to search
+     * @return solution for the maze
+     */
     @Override
     public Solution solve(ISearchable domain) {
         if (domain == null)

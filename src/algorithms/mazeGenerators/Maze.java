@@ -13,6 +13,7 @@ public class Maze {
     private Position start;
     private Position goal;
 
+
     public Maze(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
@@ -44,6 +45,9 @@ public class Maze {
     public int getCols() {
         return cols;
     }
+
+
+     //change a cell in the maze to wallORpass(0/1)
 
     public void setcell(Position p, int wallORpass){
        this.maze[p.getRowIndex()][p.getColumnIndex()] =  wallORpass;

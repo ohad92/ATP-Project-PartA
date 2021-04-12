@@ -12,7 +12,11 @@ public class Solution {
 
     public Solution(AState position) {this.solution = solutionPath(position);}
 
-
+    /**
+     *
+     * @param position
+     * @return ArrayList of State retrieve solution path
+     */
     public ArrayList<AState> solutionPath(AState position){
         ArrayList<AState> sol = new ArrayList<>();
         while (position.getCameFrom() != null){
