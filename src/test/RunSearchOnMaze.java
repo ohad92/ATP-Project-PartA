@@ -40,7 +40,7 @@ public class RunSearchOnMaze {
         ArrayList<AState> solutionPath = solution.getSolutionPath();
         m.printRealMazeWithSolution(solutionPath);
         for (int i = 0; i < solutionPath.size(); i++) {
-            System.out.println(String.format("%s.%s",i,solutionPath.get(i)));
+            System.out.println(String.format("%s. %s",i,solutionPath.get(i)));
         }
     }
 }
