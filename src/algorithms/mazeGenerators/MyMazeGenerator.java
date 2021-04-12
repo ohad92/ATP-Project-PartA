@@ -10,6 +10,12 @@ public class MyMazeGenerator extends AMazeGenerator {
         //Prim maze algorithm implementation
 
         Maze maze = new Maze(row, col);
+
+        if(row == 2 && col == 2){
+            IMazeGenerator mazeGenerator = new SimpleMazeGenerator();
+            maze = mazeGenerator.generate(row,col);
+            return maze;
+        }
         maze.setRandomPositoins();
         maze.setuniformmaze(1);
 
