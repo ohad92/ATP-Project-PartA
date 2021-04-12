@@ -8,6 +8,8 @@ public class MyMazeGenerator extends AMazeGenerator {
     @Override
     public Maze generate(int row, int col) {
         //Prim maze algorithm implementation
+        if (row < 2 || col < 2)
+            return null;
 
         Maze maze = new Maze(row, col);
 
