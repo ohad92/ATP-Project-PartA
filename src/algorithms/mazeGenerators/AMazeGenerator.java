@@ -1,8 +1,7 @@
 package algorithms.mazeGenerators;
 
 public abstract class AMazeGenerator implements IMazeGenerator {
-    public AMazeGenerator() {
-    }
+    public AMazeGenerator() {}
 
     @Override
     public long measureAlgorithmTimeMillis(int row, int col) {
