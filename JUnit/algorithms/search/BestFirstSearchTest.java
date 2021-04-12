@@ -29,9 +29,9 @@ class BestFirstSearchTest {
     }
 
     @Test
-    public void solve1500() throws Exception {
+    public void solve() throws Exception {
         for(int i=0 ; i<10 ; i++) {
-            maze = mazeGene.generate(1500, 1500);
+            maze = mazeGene.generate(1000, 1000);
             searchable = new SearchableMaze(maze);
             solution = best.solve(searchable);
             assertTrue(solution.getSolutionPath().size() > 0);

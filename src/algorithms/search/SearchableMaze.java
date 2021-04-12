@@ -36,6 +36,12 @@ public class SearchableMaze implements ISearchable {
         return this.goal;
     }
 
+    /**
+     *
+     * @param s State
+     * @return all the possible states a maze state can go to
+     */
+
     @Override
     public ArrayList<AState> getAllSuccessors(AState s) {
         if (s == null)

@@ -13,6 +13,11 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         this.successors = new ArrayList<>();
     }
 
+    /**
+     * Solves a given domain by BFS algorithm
+     * @param domain - an ISearchable object to search
+     * @return solution for the maze
+     */
     @Override
     public Solution solve(ISearchable domain) {
         if (domain == null)
