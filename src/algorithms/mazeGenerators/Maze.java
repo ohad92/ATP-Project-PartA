@@ -80,7 +80,13 @@ public class Maze {
     public void setRandomPositoins(){
         Random rand = new Random();
         this.start = new Position(rand.nextInt(this.rows),0);
-        this.goal = new Position(rand.nextInt(this.rows),this.cols-1);
+
+        int goalcol=1;
+        if (this.start.getRowIndex() % 2 != 0){
+            while (goalcol % 2 !=0)
+                goalcol = rand.nextInt(this.rows-1);
+        }
+        this.goal = new Position(goalcol,this.cols-1);
 
 
     }

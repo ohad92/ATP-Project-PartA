@@ -8,15 +8,14 @@ import java.util.ArrayList;
 public class RunSearchOnMaze {
     public static void main(String[] args) {
         IMazeGenerator mg = new MyMazeGenerator();
-        Maze maze = mg.generate(2, 10);
+        Maze maze = mg.generate(999,999);
         SearchableMaze searchableMaze = new SearchableMaze(maze);
         solveProblem(searchableMaze, new BreadthFirstSearch());
         //solveProblemWithMaze(searchableMaze, new BreadthFirstSearch(),maze);
-        //solveProblem(searchableMaze, new DepthFirstSearch());
+        solveProblem(searchableMaze, new DepthFirstSearch());
         //solveProblemWithMaze(searchableMaze, new DepthFirstSearch(),maze);
-        //solveProblem(searchableMaze, new BestFirstSearch());
+        solveProblem(searchableMaze, new BestFirstSearch());
         //solveProblemWithMaze(searchableMaze, new BestFirstSearch(),maze);
-
     }
     private static void solveProblem(ISearchable domain, ISearchingAlgorithm  searcher) {
         //Solve a searching problem with a searcher
