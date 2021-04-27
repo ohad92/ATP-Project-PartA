@@ -8,11 +8,18 @@ public class MyMazeGenerator extends AMazeGenerator {
     @Override
     public Maze generate(int row, int col) {
         //Prim maze algorithm implementation
+        if (row < 2 || col < 2)
+            return null;
 
         Maze maze = new Maze(row, col);
 
         // special case that maze is 2X2
-        if(row == 2 && col == 2){
+        if(row == 2 || col == 2){
+            IMazeGenerator mazeGenerator = new SimpleMazeGenerator();
+            maze = mazeGenerator.generate(row,col);
+            return maze;
+        }
+        if(row == 3 || col == 3){
             IMazeGenerator mazeGenerator = new SimpleMazeGenerator();
             maze = mazeGenerator.generate(row,col);
             return maze;
@@ -54,7 +61,7 @@ public class MyMazeGenerator extends AMazeGenerator {
             //Remove the wall from the list.
             frontiers.remove(randomPosition);
         }
-
+        //maze = checkfinalmaze(maze);
         return maze;
     }
 
@@ -87,4 +94,27 @@ public class MyMazeGenerator extends AMazeGenerator {
 
         return Neighbors;
     }
+/*
+    //check that there is at least 1 solution to the maze
+    public Maze checkfinalmaze(Maze m){
+        // check that not all Neighbors of start position is walls
+        m.print();
+        ArrayList<Position> startAllpass= m.frontiers(m.getStartPosition(),0);
+        ArrayList<Position> startAllwall= m.frontiers(m.getStartPosition(),1);
+        int allNeighborsStart = startAllpass.size() + startAllwall.size();
+        if (allNeighborsStart == startAllwall.size()){
+            for (int i=0;i<startAllwall.size();i++)
+                m.setcell(startAllwall.get(i),0);
+        }
+
+        // check that not all Neighbors of goal position is walls
+        ArrayList<Position> goalAllpass= m.frontiers(m.getGoalPosition(),0);
+        ArrayList<Position> goaltAllwall= m.frontiers(m.getGoalPosition(),1);
+        int allNeighborsGoal = goalAllpass.size() + goaltAllwall.size();
+        if (allNeighborsGoal == goalAllpass.size()){
+            for (int i=0;i<goaltAllwall.size();i++)
+                m.setcell(goaltAllwall.get(i),0);
+        }
+        return m;
+    }*/
 }

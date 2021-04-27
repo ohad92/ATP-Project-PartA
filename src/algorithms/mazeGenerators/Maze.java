@@ -22,6 +22,26 @@ public class Maze {
         this.goal = new Position(rows-1,cols-1);
     }
 
+    public Maze(byte[] ArrByte){
+        this.rows = byteToInt(ArrByte,0,1);
+        this.cols = byteToInt(ArrByte,2,3);
+        this.maze = new int[this.rows][this.cols];
+
+        this.start = new Position(byteToInt(ArrByte,4,5),byteToInt(ArrByte,6,7));
+        this.goal = new Position(byteToInt(ArrByte,8,9),byteToInt(ArrByte,10,11));
+        int index = 12;
+        for (int i=0; i<this.rows; i++){
+            for (int j=0; j<this.cols; j++){
+                this.maze[i][j] = ArrByte[index++];
+            }
+        }
+    }
+
+    private int byteToInt(byte[] ArrByte, int i, int j){
+        int integer = ((ArrByte[i] * 255) + (ArrByte[j] & 0xFF));
+        return integer;
+    }
+
     public int[][] getMaze() {
         return maze;
     }
@@ -80,7 +100,13 @@ public class Maze {
     public void setRandomPositoins(){
         Random rand = new Random();
         this.start = new Position(rand.nextInt(this.rows),0);
-        this.goal = new Position(rand.nextInt(this.rows),this.cols-1);
+
+        int goalcol=1;
+        if (this.start.getRowIndex() % 2 != 0){
+            while (goalcol % 2 !=0)
+                goalcol = rand.nextInt(this.rows-1);
+        }
+        this.goal = new Position(goalcol,this.cols-1);
 
 
     }
@@ -171,6 +197,51 @@ public class Maze {
             }
         printRealMaze();
         }
+
+
+
+    public byte[] toByteArray(){
+        int length = (this.getRows()*this.getCols()) + 12; //12 for start and goal positions ,rows and columns
+        byte[] shrinkMaze = new byte[length];
+        //row information
+        shrinkMaze[0] = (byte)(this.getRows() / 255);
+        shrinkMaze[1] = (byte)(this.getRows() % 255);
+
+        //column information
+        shrinkMaze[2] = (byte)(this.getCols() / 255);
+        shrinkMaze[3] = (byte)(this.getCols() % 255);
+
+        //start position row information
+        shrinkMaze[4] = (byte)(this.getStartPosition().getRowIndex() / 255);
+        shrinkMaze[5] = (byte)(this.getStartPosition().getRowIndex() % 255);
+
+        //start position column information
+        shrinkMaze[6] = (byte)(this.getStartPosition().getColumnIndex() / 255);
+        shrinkMaze[7] = (byte)(this.getStartPosition().getColumnIndex() % 255);
+
+        //goal position row information
+        shrinkMaze[8] = (byte)(this.getGoalPosition().getRowIndex() / 255);
+        shrinkMaze[9] = (byte)(this.getGoalPosition().getRowIndex() % 255);
+
+        //goal position column information
+        shrinkMaze[10] = (byte)(this.getGoalPosition().getColumnIndex() / 255);
+        shrinkMaze[11] = (byte)(this.getGoalPosition().getColumnIndex() % 255);
+
+        //fill the information about the maze arrays
+        shrinkMaze = MazeToByte(shrinkMaze);
+
+        return shrinkMaze;
+    }
+
+    public byte[] MazeToByte(byte[] arrByte){
+        int index = 12;
+        for (int i=0;i<this.getRows();i++){
+            for (int j=0;j<this.getCols();j++){
+                arrByte[index++] = (byte)(this.getMaze()[i][j]);
+            }
+        }
+        return arrByte;
+    }
 
 }
 
