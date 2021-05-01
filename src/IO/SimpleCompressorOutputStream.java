@@ -19,13 +19,15 @@ public class SimpleCompressorOutputStream extends OutputStream {
 
     public void write(byte[] b) throws IOException {
         try{
+            //List<Integer> temp = new ArrayList<Integer>(); //for check
+
             // the maze data (row,col,start and goal positions)
             for (int i = 0; i<12; i++){
                 out.write(b[i]);
                 out.flush();
+                //temp.add((int)b[i]);
             }
 
-            //List<Integer> temp = new ArrayList<Integer>();
 
             int len = 1;  //num of occurrences 0 or 1
             int index = 12; // start from index 12

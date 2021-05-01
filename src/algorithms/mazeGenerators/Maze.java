@@ -2,10 +2,13 @@ package algorithms.mazeGenerators;
 import algorithms.search.AState;
 import algorithms.search.MazeState;
 
+import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
-public class Maze {
+public class Maze implements Serializable {
 
     protected int rows;
     protected int cols;
@@ -243,5 +246,9 @@ public class Maze {
         return arrByte;
     }
 
+    @Override
+    public int hashCode() {
+        return Arrays.toString(this.toByteArray()).hashCode();
+    }
 }
 
