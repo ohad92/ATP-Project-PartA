@@ -20,56 +20,50 @@ public class MyDecompressorInputStream extends InputStream {
         try {
 
 
-        int numOfCOl = (b[3]& 0xFF) + (b[2]*255) ;
-        int numOfRow = (b[1] & 0xFF) + (b[0]*255);
+            // the maze data (row,col,start and goal positions)
 
-        int lenOfMaze = numOfCOl * numOfRow;
-        String convertToNum = "";
-        String convertToBin ;
-        int i=0;
-
-        for (; i < 12; i++) {
-            b[i] = (byte) read();
-        }
-        boolean bol = false;
-        while (!bol) {
-
-            // Convert the byte that was read to a binary number
-            int num = read();
-            convertToBin = String.format("%8s", Integer.toBinaryString(num)).replace(' ', '0');
-
-            for (int j = 0; j < 8; j++) {
-                // setting b[i] to be the j pos of curBinary string
-                // charAt() func is giving ASCII value so we decrease by 48
-                b[i] = (byte) (convertToBin.charAt(j) - 48);
-                i++;
+            for (int i=0; i < 12; i++) {
+                b[i] = (byte) read();
             }
-            if ((i < (lenOfMaze + 12) - (lenOfMaze % 8)) && (i + 8 <= (lenOfMaze + 12))) {
-                bol = true;
-            }
-        }
-        convertToBin = "";
+            int numOfRow = (b[0]*255) + (b[1] & 0xFF);
+            int numOfCOl = (b[2]*255) + (b[3]& 0xFF);
+            String convertToBin;
 
-        // Needs to represent the remainder from 8
-        if ((lenOfMaze % 8) != 0) {
-            int num = read();
-            String strToBin = Integer.toBinaryString(num);
 
-            // format the binary number to the size of mod8 filling with leading zeros
-            convertToBin = String.format("%0" + (((lenOfMaze % 8) + 1) - strToBin.length()) + "d%s", 0, strToBin).substring(1, (lenOfMaze % 8) + 1);
-            for (int j = 0; j < convertToBin.length(); j++) {
-                b[i] = (byte) (convertToBin.charAt(j) - 48);
-                i++;
+            int i=12;
+            while ((i < ((numOfCOl * numOfRow) + 12) - ((numOfCOl * numOfRow) % 8)) && (i + 8 <= ((numOfCOl * numOfRow) + 12))) {
+
+
+                // Convert the byte that was read to a binary number
+                int num = read();
+                convertToBin = String.format("%8s", Integer.toBinaryString(num)).replace(' ', '0');
+
+                for (int j = 0; j < 8; j++) {
+
+                    b[i] = (byte) (convertToBin.charAt(j) - 48);
+                    i++;
+                }
             }
+            convertToBin = "";
+
+            if (((numOfCOl * numOfRow) % 8) > 0) {
+                int num = read();
+                String strToBin = Integer.toBinaryString(num);
+
+                convertToBin = String.format("%0" + ((((numOfCOl * numOfRow) % 8) + 1) - strToBin.length()) + "d%s", 0, strToBin).substring(1, ((numOfCOl * numOfRow) % 8) + 1);
+                for (int j = 0; j < convertToBin.length(); j++) {
+                    b[i] = (byte) (convertToBin.charAt(j) - 48);
+                    i++;
+                }
+            }
+            in.close();
+            return 0;
         }
-        in.close();
-        }
+
         catch (IOException e) {
             e.printStackTrace();
             return 0;
         }
-        return 0;
-
     }
 }
 
