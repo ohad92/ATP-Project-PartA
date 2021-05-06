@@ -1,16 +1,15 @@
 package Server;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import algorithms.mazeGenerators.*;
+import algorithms.search.*;
+import java.io.*;
 import java.util.Properties;
 
 public class Configurations {
 
     // static variable single_instance of type Singleton
     private static Configurations single_instance = null;
-    // variable of type String
+
     public Properties properties;
 
     // private constructor restricted to this class itself
@@ -54,11 +53,36 @@ public class Configurations {
     }
 
 
+    public int getNumOfThreads(){
+        return Integer.parseInt(properties.getProperty("threadPoolSize"));
+    }
 
 
+    public IMazeGenerator getMazeGenerator(){
+        String prop = properties.getProperty("mazeGeneratingAlgorithm");
+        if (prop.equals("MyMazeGenerator")){
+            return new MyMazeGenerator();
+        }
+        else if (prop.equals("SimpleMazeGenerator")){
+            return new SimpleMazeGenerator();
+        }
+        else{
+            return new EmptyMazeGenerator();
+        }
+    }
 
-
-
+    public ASearchingAlgorithm getMazeSearchingAlgorithm(){
+        String searchingalgorithm = properties.getProperty("mazeSearchingAlgorithm");
+        if (searchingalgorithm.equals("BreadthFirstSearch")){
+            return new BreadthFirstSearch();
+        }
+        else if (searchingalgorithm.equals("DepthFirstSearch")){
+            return new DepthFirstSearch();
+        }
+        else {
+            return new BestFirstSearch();
+        }
+    }
 
 
 }

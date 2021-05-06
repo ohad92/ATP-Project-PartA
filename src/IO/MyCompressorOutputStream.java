@@ -19,13 +19,13 @@ public class MyCompressorOutputStream extends OutputStream {
     @Override
     public void write(byte[] b) throws IOException {
         try{
-            List<String> temp = new ArrayList<String>(); //for check
+            //List<String> temp = new ArrayList<String>(); //for check
 
             // the maze data (row,col,start and goal positions)
             for (int i = 0; i<12; i++){
                 out.write(b[i]);
                 out.flush();
-                temp.add(Integer.toString(b[i]));
+                //temp.add(Integer.toString(b[i]));
             }
 
             int Length= b.length - 12;
@@ -41,7 +41,7 @@ public class MyCompressorOutputStream extends OutputStream {
                 for (int j = i; j < i+8; j++){
                     string += Integer.toString(b[j]);
                 }
-                temp.add(string);
+                //temp.add(string);
                 out.write((byte)(Integer.parseInt(string,2)));
                 out.flush();
                 i += 8;
@@ -53,17 +53,12 @@ public class MyCompressorOutputStream extends OutputStream {
                 for (int j = i; j < b.length; j++){
                     string += Integer.toString(b[j]);
                 }
-                temp.add(string);
+                //temp.add(string);
                 out.write((byte)Integer.parseInt(string,2));
                 out.flush();
             }
 
             out.close();
-
-
-
-
-
 
             /*
             List<Integer> temp = new ArrayList<Integer>(); //for check

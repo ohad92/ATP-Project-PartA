@@ -51,11 +51,13 @@ public class Server {
                     //}).start();
 
                 } catch (SocketTimeoutException e){
+                    System.out.println("no clients");
                 }
             }
-            serverSocket.close();
+
             threadPool.shutdown(); // do not allow any new tasks into the thread pool (not doing anything to the current tasks and running threads)
             //threadPool.shutdownNow(); // do not allow any new tasks into the thread pool, and also interrupts all running threads (do not terminate the threads, so if they do not handle interrupts properly, they could never stop...)
+            serverSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -72,5 +74,6 @@ public class Server {
 
     public void stop(){
         stop = true;
+        System.out.println("server stopped");
     }
 }
