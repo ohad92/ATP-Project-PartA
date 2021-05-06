@@ -26,13 +26,17 @@ public class Configurations {
         return single_instance;
     }
 
+    public static void main(String[] args) {
+        getInstance();
+        getInstance();
+    }
 
 
     public static Properties setproperties() {
         try{
 
             Properties prop = new Properties();
-            OutputStream output = new FileOutputStream("resources/config.propertis");
+            OutputStream output = new FileOutputStream("resources/config.properties");
 
             // set key and value properties
             prop.setProperty("threadPoolSize","2");
@@ -43,7 +47,7 @@ public class Configurations {
             prop.store(output, null);
 
             // load a properties file
-            prop.load(new FileInputStream("resources/config.propertis"));
+            prop.load(new FileInputStream("resources/config.properties"));
             return prop;
 
         } catch (Exception e) {
