@@ -6,7 +6,7 @@ import java.util.Locale;
 
 public class ServerStrategyStringReverser implements IServerStrategy{
     @Override
-    public void applyStrategy(InputStream inFromClient, OutputStream outToClient) {
+    public void ServerStrategy(InputStream inFromClient, OutputStream outToClient) {
         // The Streams from Channels are interruptible,
         // so we decorate our input stream even more to enable it to also be interruptible:
         InputStream interruptibleInputStream = Channels.newInputStream(Channels.newChannel(inFromClient));

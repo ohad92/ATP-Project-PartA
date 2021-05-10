@@ -13,7 +13,7 @@ import java.time.chrono.IsoChronology;
 
 public class ServerStrategySolveSearchProblem implements IServerStrategy {
     @Override
-    public void applyStrategy(InputStream InFromClient, OutputStream outToClient) {
+    public void ServerStrategy(InputStream InFromClient, OutputStream outToClient) {
         try{
             ObjectInputStream fromClient = new ObjectInputStream(InFromClient);
             ObjectOutputStream toClient = new ObjectOutputStream(outToClient);

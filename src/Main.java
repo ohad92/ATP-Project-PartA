@@ -1,8 +1,6 @@
 import Client.*;
 import IO.MyCompressorOutputStream;
 import IO.MyDecompressorInputStream;
-import IO.SimpleCompressorOutputStream;
-import IO.SimpleDecompressorInputStream;
 import Server.*;
 import algorithms.mazeGenerators.AMazeGenerator;
 import algorithms.mazeGenerators.Maze;
@@ -112,7 +110,7 @@ public class Main {
         Maze maze = mazeGenerator.generate(size, size); //Generate new maze
         double mazeOriginalSize = maze.toByteArray().length;
         try {
-            OutputStream out = new SimpleCompressorOutputStream(new FileOutputStream(mazeFileName));
+            OutputStream out = new MyCompressorOutputStream(new FileOutputStream(mazeFileName));
             out.write(maze.toByteArray());
             out.flush();
             out.close();
@@ -123,7 +121,7 @@ public class Main {
 
         byte savedMazeBytes[] = new byte[0];
         try {
-            InputStream in = new SimpleDecompressorInputStream(new FileInputStream(mazeFileName));
+            InputStream in = new MyDecompressorInputStream(new FileInputStream(mazeFileName));
             savedMazeBytes = new byte[maze.toByteArray().length];
             in.read(savedMazeBytes);
             in.close();
@@ -131,9 +129,9 @@ public class Main {
 
         }
         File compressed = new File("savedMaze.maze");
-        //appendToResultsFile("compressed size - " + (double) compressed.length() / 1024);
+        appendToResultsFile("compressed size - " + (double) compressed.length() / 1024);
         double current_comp = compressed.length();
-        //appendToResultsFile("compression rate - " + (((double)compressed.length() / 1024) / mazeOriginalSize) * 100);
+        appendToResultsFile("compression rate - " + (((double)compressed.length() / 1024) / mazeOriginalSize) * 100);
         Maze loadedMaze = new Maze(savedMazeBytes);
         boolean areMazesEquals = Arrays.equals(loadedMaze.toByteArray(), maze.toByteArray());
         if (areMazesEquals == true)
@@ -177,11 +175,11 @@ public class Main {
                         total_test++;
                         int size = (int) (50 * (i+1));
                         ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
-                        ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                         toServer.flush();
                         int[] mazeDimensions = new int[]{size, size};
                         toServer.writeObject(mazeDimensions); //send maze dimensions to server
                         toServer.flush();
+                        ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                         byte[] compressedMaze = (byte[]) fromServer.readObject(); //read generated maze (compressed with MyCompressor) from server
                         InputStream is = new MyDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
                         byte[] decompressedMaze = new byte[1000000 /*CHANGE SIZE ACCORDING TO YOU MAZE SIZE*/]; //allocating byte[] for the decompressed maze -
@@ -216,13 +214,13 @@ public class Main {
                         total_test++;
                         int size = (int) (50 * (i+1));
                         ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
-                        ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                         toServer.flush();
                         MyMazeGenerator mg = new MyMazeGenerator();
 
                         Maze maze = mg.generate(size, size);
                         toServer.writeObject(maze); //send maze to server
                         toServer.flush();
+                        ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                         Solution mazeSolution = (Solution) fromServer.readObject(); //read generated maze (compressed with MyCompressor) from server
 
                         //Print Maze Solution retrieved from the server
